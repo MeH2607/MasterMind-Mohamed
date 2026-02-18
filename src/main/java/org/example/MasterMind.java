@@ -5,8 +5,6 @@ import lombok.Getter;
 
 import java.util.*;
 
-@AllArgsConstructor
-@Getter
 public class MasterMind {
 
     String[] colours = {"red","green", "blue", "yellow", "orange", "pink", "black", "white"};
@@ -15,9 +13,11 @@ public class MasterMind {
     int points = 10; //starts at 10 points and goes down for every wrong answer
     Scanner scanner = new Scanner(System.in);
 
+    public MasterMind() {
+        startGame();
+    }
 
-
-public ArrayList<String> generateCode(){
+    public ArrayList<String> generateCode(){
 
 
     for(int i = 0; i<4; i++){
@@ -34,33 +34,43 @@ public void startGame(){
     System.out.println("Press enter to start game");
     scanner.next();
 
-
+    validateAndCheckGuess();
 
 }
 
 public void validateAndCheckGuess(){
     ArrayList<String> userGuess = new ArrayList<>();
-    System.out.println("Enter your guess by pressing the corresponding numbers");
-    System.out.println("\n 1. Red" +
-            "\n 2. Green" +
-            "\n 3. Blue" +
-            "\n 4. Yellow" +
-            "\n 5. Orange" +
-            "\n 6. Pink" +
-            "\n 7. Black" +
-            "\n 8. White");
+    boolean guessSubmitted = false;
+    while(guessSubmitted == false) {
+        System.out.println("Enter your guess by pressing the corresponding numbers");
+        System.out.println("\n 1. Red" +
+                "\n 2. Green" +
+                "\n 3. Blue" +
+                "\n 4. Yellow" +
+                "\n 5. Orange" +
+                "\n 6. Pink" +
+                "\n 7. Black" +
+                "\n 8. White");
 
-        try{
         String input = scanner.next();
+        List<String> inputSplit = Arrays.asList(input.split(""));
 
-        String[] inputSplit = input.split("(?!^)");
+        try {
 
-        for(int i = 0; i>inputSplit.length;i++){
-            userGuess.add(colours[Integer.parseInt(inputSplit[i])]);
+            for (int i = 0; i < 4; i++) {
+                int parsedColourCode = Integer.parseInt(inputSplit.get(i));
+                userGuess.add(colours[parsedColourCode-1]);
+            }
+
+            guessSubmitted = true;
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("\nplease input the number value of your guess");
         }
 
-        } catch (IllegalArgumentException  e) {
-            System.out.println("please input the number value of your guess");
-        }
+    }
+
+    System.out.println(userGuess.toString());
 }
+
 }
