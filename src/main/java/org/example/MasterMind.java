@@ -23,23 +23,28 @@ public class MasterMind {
     for(int i = 0; i<4; i++){
         code.add(colours[random.nextInt(colours.length)]);
     }
-
+        System.out.println(code.toString());
     return code;
 }
 
 public void startGame(){
+    boolean codeCracked = false;
+
     System.out.println("Welcome to Mastermind!");
     generateCode();
 
     System.out.println("Press enter to start game");
     scanner.next();
 
-    validateAndCheckGuess();
+    while(codeCracked==false){
+    ArrayList<String> userGuess = new ArrayList<>();
+
+    validateGuess(userGuess);
+    }
 
 }
 
-public void validateAndCheckGuess(){
-    ArrayList<String> userGuess = new ArrayList<>();
+public void validateGuess(ArrayList<String> userGuess ){
     boolean guessSubmitted = false;
     while(guessSubmitted == false) {
         System.out.println("Enter your guess by pressing the corresponding numbers");
@@ -70,7 +75,36 @@ public void validateAndCheckGuess(){
 
     }
 
+    testGuess(userGuess);
+
     System.out.println(userGuess.toString());
+}
+
+public void testGuess(ArrayList<String> userGuess ){
+        int correctColourAndSpot = 0;
+        int correctColourOnly = 0;
+        boolean codeIsCorrect = userGuess.equals(code);
+    System.out.println(codeIsCorrect);
+
+    if(codeIsCorrect==false){
+        points -= 1;
+        for(int i = 0; i<4; i++){
+            if (code.get(i) == userGuess.get(i)){
+                correctColourAndSpot += 1;
+            }
+            else{
+                if(code.contains(userGuess.get(i))){
+                    correctColourOnly += 1;
+                }
+            }
+        }
+    }
+    else{
+        System.out.println("You guessed the code!!" +
+                "\nYour final score is: " + points +
+                "\nThank you for playing");
+    }
+
 }
 
 }
