@@ -3,6 +3,7 @@ package org.example;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.io.Console;
 import java.util.*;
 
 public class MasterMind {
@@ -18,7 +19,7 @@ public class MasterMind {
     }
 
     public ArrayList<String> generateCode(){
-
+    code.clear();
 
     for(int i = 0; i<4; i++){
         code.add(colours[random.nextInt(colours.length)]);
@@ -34,7 +35,7 @@ public void startGame(){
     generateCode();
 
     System.out.println("Press enter to start game");
-    scanner.next();
+    scanner.nextLine();
 
     while(codeCracked==false){
     ArrayList<String> userGuess = new ArrayList<>();
@@ -49,13 +50,13 @@ public void validateGuess(ArrayList<String> userGuess ){
     while(guessSubmitted == false) {
         System.out.println("Enter your guess by pressing the corresponding numbers");
         System.out.println("\n 1. Red" +
-                "\n 2. Green" +
-                "\n 3. Blue" +
-                "\n 4. Yellow" +
+                "\t 2. Green" +
+                "\t 3. Blue" +
+                "\t 4. Yellow" +
                 "\n 5. Orange" +
-                "\n 6. Pink" +
-                "\n 7. Black" +
-                "\n 8. White");
+                "\t 6. Pink" +
+                "\t 7. Black" +
+                "\t 8. White");
 
         String input = scanner.next();
         List<String> inputSplit = Arrays.asList(input.split(""));
@@ -92,17 +93,42 @@ public void testGuess(ArrayList<String> userGuess ){
             if (code.get(i) == userGuess.get(i)){
                 correctColourAndSpot += 1;
             }
-            else{
+            else {
                 if(code.contains(userGuess.get(i))){
                     correctColourOnly += 1;
                 }
             }
         }
+        System.out.println("Your guess included:\n"
+                + correctColourAndSpot + " correct colour and the correct spot\n" +
+                correctColourOnly + " correct colour in a wrong sport ");
     }
     else{
         System.out.println("You guessed the code!!" +
                 "\nYour final score is: " + points +
                 "\nThank you for playing");
+
+        System.out.println("Do you want to play agan?" +
+                "\n1. yes" +
+                "\n2. No");
+        int input = scanner.nextInt();
+        boolean optionSelected = false;
+        while(optionSelected == false)
+        switch(input){
+            case 1:
+                optionSelected = true;
+                startGame();
+                break;
+            case 2:
+                optionSelected = true;
+                System.out.println("Thank you for playing Mastermind :D");
+                System.exit(0);
+            break;
+            default:
+                System.out.println("please choose one of the options above");
+                break;
+        }
+
     }
 
 }
