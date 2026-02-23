@@ -50,6 +50,10 @@ public void startGame(){
     validateGuessInput(userGuess);
     }
 
+    if(points == 0){
+        askForReplay();
+    }
+
 }
 
 //method to recieve the players input and validate that it's an acceptable answer
@@ -135,14 +139,14 @@ public void testGuess(ArrayList<String> userGuess ){
         System.out.println("You guessed the code!!" +
                 "\nYour final score is: " + points +
                 "\nThank you for playing");
-
+                askForReplay();
 
 
     }
 
 }
 
-public void askForReplay(){
+public void endGameScreen(){
     System.out.println("Do you want to play agan?" +
             "\n1. yes" +
             "\n2. No");
