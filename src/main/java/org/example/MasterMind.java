@@ -85,20 +85,22 @@ public void testGuess(ArrayList<String> userGuess ){
     System.out.println(codeIsCorrect);
 
     if(codeIsCorrect==false){
-        points -= 1;
-        for(int i = 0; i<4; i++){
+        //make a copy of the code that can be manipulated without manipulating the original
+        ArrayList<String> copyCode = new ArrayList<>(code);
+        //reverse for loop to prevent errors
+        for(int i = 3; i>=0; i--){
+            //if a guess is in the correct spot and colour, remove it from the copied code
             if (code.get(i) == userGuess.get(i)){
-                correctColourAndSpot += 1;
-            }
-            else {
-                if(code.contains(userGuess.get(i))){
-                    correctColourOnly += 1;
-                }
+                copyCode.remove(i);
             }
         }
-        System.out.println("Your guess included:\n"
-                + correctColourAndSpot + " correct colour and the correct spot\n" +
-                correctColourOnly + " correct colour in a wrong sport ");
+        //checks if any of the guesses still remains in the leftover copy of the code.
+        for(String s : userGuess){
+            if(copyCode.contains(s)){
+                correctColourOnly +=1;
+            }
+        }
+        correctColourAndSpot = code.size()-copyCode.size();
     }
     else{
         System.out.println("You guessed the code!!" +
