@@ -10,7 +10,7 @@ public class MasterMind {
     //the list representing the code the computer will generate
     ArrayList<String> code = new ArrayList<>(); //the list representing the code made by the computer
     Random random = new Random();
-    int points = 10; //starts at 10 points and goes down for every wrong answer
+    int points = 2; //starts at 10 points and goes down for every wrong answer
     Scanner scanner = new Scanner(System.in);
 
     public MasterMind() {
@@ -44,15 +44,14 @@ public void startGame(){
     generateCode();
 
     //While loop to let you try again after failed attempts. Stops when you crack the code or reach zero points
-    while(codeCracked==false || points != 0){
+    while(codeCracked==false){
+
+
     userGuess.clear();
 
     validateGuessInput(userGuess);
     }
 
-    if(points == 0){
-        askForReplay();
-    }
 
 }
 
@@ -62,14 +61,6 @@ public void validateGuessInput(ArrayList<String> userGuess ){
 
     while(guessSubmitted == false) {
         System.out.println("Enter your guess by pressing the corresponding numbers");
-     /*   System.out.println("\n 1. Red" +
-                "\t 2. Green" +
-                "\t 3. Blue" +
-                "\t 4. Yellow" +
-                "\n 5. Orange" +
-                "\t 6. Pink" +
-                "\t 7. Black" +
-                "\t 8. White"); //ToDo make into printf and make prettier*/
 
 System.out.printf("%-15s%-15s%-15s%-15s%n%-15s%-15s%-15s%-15s%n", 
     "1. Red", "2. Green", "3. Blue", "4. Yellow", 
@@ -111,8 +102,11 @@ public void testGuess(ArrayList<String> userGuess ){
 
 
     if(codeIsCorrect==false){
-        System.out.println("Your guess: \n" + userGuess.toString() + "\nwas incorrect" );
         points -= 1;
+        System.out.println("Your guess: \n" + userGuess.toString() + "\nwas incorrect. You have " + points + " points" );
+        if(points == 0){
+            endGameScreen(points);
+        }
         //make a copy of the code that can be manipulated without manipulating the original
         ArrayList<String> copyCode = new ArrayList<>(code);
         //reverse for loop to prevent errors
@@ -136,26 +130,39 @@ public void testGuess(ArrayList<String> userGuess ){
                 correctColourOnly + " correct colour in a wrong sport ");
     }
     else{
-        System.out.println("You guessed the code!!" +
-                "\nYour final score is: " + points +
-                "\nThank you for playing");
-                askForReplay();
+
+                endGameScreen(points);
 
 
     }
 
 }
 
-public void endGameScreen(){
+public void endGameScreen(int points){
+
+        if(points>0){
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n" +
+                    "You guessed the code!!" +
+                    "\nYour final score is: " + points +
+                    "\nThank you for playing");
+        } else if (points <=0) {
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n" +
+                    "You have spent all your guesses" +
+            "\nYou could not crack the code" +
+            "\nThe code was " + code.toString() +
+            "\nThank you for playing");
+
+        }
     System.out.println("Do you want to play agan?" +
             "\n1. yes" +
             "\n2. No");
 
-    int input = scanner.nextInt();
-    boolean optionSelected = false;
-    while(optionSelected == false)
 
-        switch(input){
+    boolean optionSelected = false;
+    while(optionSelected == false) {
+
+    int input = scanner.nextInt();
+        switch (input) {
             case 1:
                 optionSelected = true;
                 startGame();
@@ -169,6 +176,7 @@ public void endGameScreen(){
                 System.out.println("please choose one of the options above");
                 break;
         }
+    }
 }
 
 }
