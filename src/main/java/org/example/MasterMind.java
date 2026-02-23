@@ -1,9 +1,6 @@
 package org.example;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-import java.io.Console;
 import java.util.*;
 
 public class MasterMind {
