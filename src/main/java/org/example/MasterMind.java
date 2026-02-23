@@ -47,26 +47,35 @@ public void validateGuessInput(ArrayList<String> userGuess ){
 
     while(guessSubmitted == false) {
         System.out.println("Enter your guess by pressing the corresponding numbers");
-        System.out.println("\n 1. Red" +
+     /*   System.out.println("\n 1. Red" +
                 "\t 2. Green" +
                 "\t 3. Blue" +
                 "\t 4. Yellow" +
                 "\n 5. Orange" +
                 "\t 6. Pink" +
                 "\t 7. Black" +
-                "\t 8. White"); //ToDo make into printf and make prettier
+                "\t 8. White"); //ToDo make into printf and make prettier*/
+
+System.out.printf("%-15s%-15s%-15s%-15s%n%-15s%-15s%-15s%-15s%n", 
+    "1. Red", "2. Green", "3. Blue", "4. Yellow", 
+    "5. Orange", "6. Pink", "7. Black", "8. White");
 
         String input = scanner.next();
         List<String> inputSplit = Arrays.asList(input.split(""));
 
         try {
-
-            for (int i = 0; i < 4; i++) {
-                int parsedColourCode = Integer.parseInt(inputSplit.get(i));
-                userGuess.add(colours[parsedColourCode-1]);
+            if(inputSplit.size() == 4) {
+                for (int i = 0; i < 4; i++) {
+                    int parsedColourCode = Integer.parseInt(inputSplit.get(i));
+                    userGuess.add(colours[parsedColourCode - 1]);
+                }
+                guessSubmitted = true;
+            }
+            else{
+                System.out.println("Please write a 4 colour code");
             }
 
-            guessSubmitted = true;
+
 
         } catch (IllegalArgumentException e) {
             System.out.println("\nplease input the number value of your guess");
