@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.example.MasterMind;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,9 +12,11 @@ import java.util.Arrays;
 public class MasterMindTest {
 
     ArrayList<String> code = new ArrayList<>(
-            Arrays.asList("yellow", "blue", "yellow", "blue"));
+            Arrays.asList("blue", "blue", "blue", "yellow"));
     ArrayList<String> userGuess = new ArrayList<>(
-            Arrays.asList("yellow", "yellow", "yellow", "yellow"));
+            Arrays.asList("yellow", "yellow", "yellow", "red"));
+
+    MasterMind masterMind = new MasterMind();
 
     @Test
     void testGuessResponse(){
@@ -31,7 +34,7 @@ public class MasterMindTest {
             for(int i = 0; i<4; i++){
                 if (code.get(i) == userGuess.get(i)){
                     correctColourAndSpot += 1;
-                    correctIndexes.add(i);
+
                 }
                 else {
                     if(code.contains(userGuess.get(i))){
@@ -61,20 +64,23 @@ public class MasterMindTest {
             //reverse for loop to prevent errors
             for(int i = 3; i>=0; i--){
                 //if a guess is in the correct spot and colour, remove it from the copied code
-                if (code.get(i) == userGuess.get(i)){
+                if (code.get(i).equals(userGuess.get(i))){
                     copyCode.remove(i);
+                    correctColourAndSpot +=1;
                 }
             }
             //checks if any of the guesses still remains in the leftover copy of the code.
             for(String s : userGuess){
                 if(copyCode.contains(s)){
                     correctColourOnly +=1;
+                    copyCode.remove(s);
                 }
             }
-            correctColourAndSpot = code.size()-copyCode.size();
         }
 
-        assertEquals(0, correctColourOnly);
-        assertEquals(2, correctColourAndSpot);
+        assertEquals(1, correctColourOnly);
+        assertEquals(0, correctColourAndSpot);
     }
+
+
 }

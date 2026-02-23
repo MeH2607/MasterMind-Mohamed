@@ -55,7 +55,7 @@ public void validateGuessInput(ArrayList<String> userGuess ){
                 "\n 5. Orange" +
                 "\t 6. Pink" +
                 "\t 7. Black" +
-                "\t 8. White");
+                "\t 8. White"); //ToDo make into printf and make prettier
 
         String input = scanner.next();
         List<String> inputSplit = Arrays.asList(input.split(""));
@@ -87,23 +87,24 @@ public void testGuess(ArrayList<String> userGuess ){
 
 
     if(codeIsCorrect==false){
-        System.out.println("Incorrect guess");
+        System.out.println("Your guess: \n" + userGuess.toString() + "\nwas incorrect" );
         //make a copy of the code that can be manipulated without manipulating the original
         ArrayList<String> copyCode = new ArrayList<>(code);
         //reverse for loop to prevent errors
         for(int i = 3; i>=0; i--){
             //if a guess is in the correct spot and colour, remove it from the copied code
             if (code.get(i) == userGuess.get(i)){
+                correctColourAndSpot += 1;
                 copyCode.remove(i);
             }
         }
         //checks if any of the guesses still remains in the leftover copy of the code.
-        for(String s : userGuess){
-            if(copyCode.contains(s)){
-                correctColourOnly +=1;
+        for(String s : userGuess) {
+            if (copyCode.contains(s)) {
+                correctColourOnly += 1;
+                copyCode.remove(s);
             }
         }
-        correctColourAndSpot = code.size()-copyCode.size();
 
         System.out.println("Your guess included:\n"
                 + correctColourAndSpot + " correct colour and the correct spot\n" +
