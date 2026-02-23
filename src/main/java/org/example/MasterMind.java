@@ -5,7 +5,9 @@ import java.util.*;
 
 public class MasterMind {
 
+    //The colours used for the game
     String[] colours = {"red","green", "blue", "yellow", "orange", "pink", "black", "white"};
+    //the list representing the code the computer will generate
     ArrayList<String> code = new ArrayList<>(); //the list representing the code made by the computer
     Random random = new Random();
     int points = 10; //starts at 10 points and goes down for every wrong answer
@@ -16,25 +18,33 @@ public class MasterMind {
     }
 
     public void generateCode(){
-    code.clear();
+        //on new game, ensure the code is cleared
+        code.clear();
 
     for(int i = 0; i<4; i++){
         code.add(colours[random.nextInt(colours.length)]);
     }
-        System.out.println(code.toString());
+        //for debugging purposes
+        //System.out.println(code.toString());
 }
 
 public void startGame(){
+    //checks if the code has been cracked
     boolean codeCracked = false;
+
+    //preparing the list representing the users guess
     ArrayList<String> userGuess = new ArrayList<>();
 
     System.out.println("Welcome to Mastermind!");
-    generateCode();
+
 
     System.out.println("Press enter to start game");
     scanner.nextLine();
 
-    while(codeCracked==false){
+    generateCode();
+
+    //While loop to let you try again after failed attempts. Stops when you crack the code or reach zero points
+    while(codeCracked==false || points != 0){
     userGuess.clear();
 
     validateGuessInput(userGuess);
@@ -42,6 +52,7 @@ public void startGame(){
 
 }
 
+//method to recieve the players input and validate that it's an acceptable answer
 public void validateGuessInput(ArrayList<String> userGuess ){
     boolean guessSubmitted = false;
 
@@ -64,6 +75,7 @@ System.out.printf("%-15s%-15s%-15s%-15s%n%-15s%-15s%-15s%-15s%n",
         List<String> inputSplit = Arrays.asList(input.split(""));
 
         try {
+            //ensure that the player inputs a 4 colour code
             if(inputSplit.size() == 4) {
                 for (int i = 0; i < 4; i++) {
                     int parsedColourCode = Integer.parseInt(inputSplit.get(i));
