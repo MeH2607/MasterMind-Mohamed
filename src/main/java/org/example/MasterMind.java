@@ -27,6 +27,7 @@ public class MasterMind {
 
 public void startGame(){
     boolean codeCracked = false;
+    ArrayList<String> userGuess = new ArrayList<>();
 
     System.out.println("Welcome to Mastermind!");
     generateCode();
@@ -35,15 +36,16 @@ public void startGame(){
     scanner.nextLine();
 
     while(codeCracked==false){
-    ArrayList<String> userGuess = new ArrayList<>();
+    userGuess.clear();
 
-    validateGuess(userGuess);
+    validateGuessInput(userGuess);
     }
 
 }
 
-public void validateGuess(ArrayList<String> userGuess ){
+public void validateGuessInput(ArrayList<String> userGuess ){
     boolean guessSubmitted = false;
+
     while(guessSubmitted == false) {
         System.out.println("Enter your guess by pressing the corresponding numbers");
         System.out.println("\n 1. Red" +
@@ -75,16 +77,17 @@ public void validateGuess(ArrayList<String> userGuess ){
 
     testGuess(userGuess);
 
-    System.out.println(userGuess.toString());
+
 }
 
 public void testGuess(ArrayList<String> userGuess ){
         int correctColourAndSpot = 0;
         int correctColourOnly = 0;
         boolean codeIsCorrect = userGuess.equals(code);
-    System.out.println(codeIsCorrect);
+
 
     if(codeIsCorrect==false){
+        System.out.println("Incorrect guess");
         //make a copy of the code that can be manipulated without manipulating the original
         ArrayList<String> copyCode = new ArrayList<>(code);
         //reverse for loop to prevent errors
@@ -101,6 +104,10 @@ public void testGuess(ArrayList<String> userGuess ){
             }
         }
         correctColourAndSpot = code.size()-copyCode.size();
+
+        System.out.println("Your guess included:\n"
+                + correctColourAndSpot + " correct colour and the correct spot\n" +
+                correctColourOnly + " correct colour in a wrong sport ");
     }
     else{
         System.out.println("You guessed the code!!" +
