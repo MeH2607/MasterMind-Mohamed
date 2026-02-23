@@ -1,22 +1,19 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.example.MasterMind;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MasterMindTest {
+public class MasterMindTerminalTest {
 
     ArrayList<String> code = new ArrayList<>(
-            Arrays.asList("blue", "blue", "blue", "yellow"));
+            Arrays.asList("blue", "yellow", "yellow", "blue"));
     ArrayList<String> userGuess = new ArrayList<>(
-            Arrays.asList("yellow", "yellow", "yellow", "red"));
+            Arrays.asList("yellow", "blue", "blue", "yellow"));
 
-    MasterMind masterMind = new MasterMind();
+
 
     @Test
     void testGuessResponse(){
@@ -78,7 +75,7 @@ public class MasterMindTest {
             }
         }
 
-        assertEquals(1, correctColourOnly);
+        assertEquals(4, correctColourOnly);
         assertEquals(0, correctColourAndSpot);
     }
 

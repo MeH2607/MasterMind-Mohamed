@@ -3,7 +3,7 @@ package org.example;
 
 import java.util.*;
 
-public class MasterMind {
+public class MasterMindTerminal {
 
     //The colours used for the game
     String[] colours = {"red","green", "blue", "yellow", "orange", "pink", "black", "white"};
@@ -13,7 +13,7 @@ public class MasterMind {
     int points = 10; //starts at 10 points and goes down for every wrong answer
     Scanner scanner = new Scanner(System.in);
 
-    public MasterMind() {
+    public MasterMindTerminal() {
         startGame();
     }
 
