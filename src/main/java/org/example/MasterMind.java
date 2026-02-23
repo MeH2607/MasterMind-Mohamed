@@ -108,6 +108,7 @@ public void testGuess(ArrayList<String> userGuess ){
 
     if(codeIsCorrect==false){
         System.out.println("Your guess: \n" + userGuess.toString() + "\nwas incorrect" );
+        points -= 1;
         //make a copy of the code that can be manipulated without manipulating the original
         ArrayList<String> copyCode = new ArrayList<>(code);
         //reverse for loop to prevent errors
@@ -135,13 +136,20 @@ public void testGuess(ArrayList<String> userGuess ){
                 "\nYour final score is: " + points +
                 "\nThank you for playing");
 
-        System.out.println("Do you want to play agan?" +
-                "\n1. yes" +
-                "\n2. No");
 
-        int input = scanner.nextInt();
-        boolean optionSelected = false;
-        while(optionSelected == false)
+
+    }
+
+}
+
+public void askForReplay(){
+    System.out.println("Do you want to play agan?" +
+            "\n1. yes" +
+            "\n2. No");
+
+    int input = scanner.nextInt();
+    boolean optionSelected = false;
+    while(optionSelected == false)
 
         switch(input){
             case 1:
@@ -152,14 +160,11 @@ public void testGuess(ArrayList<String> userGuess ){
                 optionSelected = true;
                 System.out.println("Thank you for playing Mastermind :D");
                 System.exit(0);
-            break;
+                break;
             default:
                 System.out.println("please choose one of the options above");
                 break;
         }
-
-    }
-
 }
 
 }
