@@ -15,14 +15,13 @@ public class MasterMind {
         startGame();
     }
 
-    public ArrayList<String> generateCode(){
+    public void generateCode(){
     code.clear();
 
     for(int i = 0; i<4; i++){
         code.add(colours[random.nextInt(colours.length)]);
     }
         System.out.println(code.toString());
-    return code;
 }
 
 public void startGame(){
@@ -118,9 +117,11 @@ public void testGuess(ArrayList<String> userGuess ){
         System.out.println("Do you want to play agan?" +
                 "\n1. yes" +
                 "\n2. No");
+
         int input = scanner.nextInt();
         boolean optionSelected = false;
         while(optionSelected == false)
+
         switch(input){
             case 1:
                 optionSelected = true;
