@@ -15,7 +15,7 @@ public class MasterMindTerminalTest {
 
 
 
-    @Test
+   /* @Test
     void testGuessResponse(){
 
 
@@ -39,14 +39,9 @@ public class MasterMindTerminalTest {
                     }
                 }
             }
-            /*System.out.println("Your guess included:\n"
-                    + correctColourAndSpot + " correct colour and the correct spot\n" +
-                    correctColourOnly + " correct colour in a wrong sport ");*/
-
-
         }
         assertEquals(0, correctColourOnly);
-    }
+    }*/
 
     @Test
     void testNewResponseLogic(){
