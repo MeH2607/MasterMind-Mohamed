@@ -12,9 +12,6 @@ public class MasterMindTerminalTest {
     ArrayList<String> code = new ArrayList<>(
             Arrays.asList("blue", "yellow", "yellow", "red"));
 
-
-
-
    /* @Test
     void testGuessResponse(){
 
@@ -111,6 +108,39 @@ public class MasterMindTerminalTest {
         assertEquals(0, correctColourOnly);
         assertEquals(2, correctColourAndSpot);
     }
+    @Test
+    void testNoCorrect() {
+        ArrayList<String> userGuess = new ArrayList<>(
+                Arrays.asList("green", "white", "black", "purple"));
+
+        int correctColourAndSpot = 0;
+        int correctColourOnly = 0;
+        boolean codeIsCorrect = userGuess.equals(code);
+
+        if(codeIsCorrect==false){
+            //make a copy of the code that can be manipulated without manipulating the original
+            ArrayList<String> copyCode = new ArrayList<>(code);
+            //reverse for loop to prevent errors
+            for(int i = 3; i>=0; i--){
+                //if a guess is in the correct spot and colour, remove it from the copied code
+                if (code.get(i).equals(userGuess.get(i))){
+                    copyCode.remove(i);
+                    userGuess.remove(i);
+                    correctColourAndSpot +=1;
+                }
+            }
+            //checks if any of the guesses still remains in the leftover copy of the code.
+            for(String s : userGuess){
+                if(copyCode.contains(s)){
+                    correctColourOnly +=1;
+                    copyCode.remove(s);
+                }
+            }
+        }
+
+        assertEquals(0, correctColourOnly);
+        assertEquals(0, correctColourAndSpot);
+    }
 
     @Test
     void testHalfCorrectHalrightColourWrongSpotWithDuplicateColour(){
@@ -146,4 +176,74 @@ public class MasterMindTerminalTest {
         assertEquals(2, correctColourOnly);
         assertEquals(2, correctColourAndSpot);
     }
+
+    @Test
+    void testAllCorrectColoursWrongSpots() {
+        ArrayList<String> userGuess = new ArrayList<>(
+                Arrays.asList("yellow", "red", "blue", "yellow"));
+
+        int correctColourAndSpot = 0;
+        int correctColourOnly = 0;
+        boolean codeIsCorrect = userGuess.equals(code);
+
+        if(codeIsCorrect==false){
+            //make a copy of the code that can be manipulated without manipulating the original
+            ArrayList<String> copyCode = new ArrayList<>(code);
+            //reverse for loop to prevent errors
+            for(int i = 3; i>=0; i--){
+                //if a guess is in the correct spot and colour, remove it from the copied code
+                if (code.get(i).equals(userGuess.get(i))){
+                    copyCode.remove(i);
+                    userGuess.remove(i);
+                    correctColourAndSpot +=1;
+                }
+            }
+            //checks if any of the guesses still remains in the leftover copy of the code.
+            for(String s : userGuess){
+                if(copyCode.contains(s)){
+                    correctColourOnly +=1;
+                    copyCode.remove(s);
+                }
+            }
+        }
+
+        assertEquals(4, correctColourOnly);
+        assertEquals(0, correctColourAndSpot);
+    }
+
+    @Test
+    void testTooManyDuplicateGuesses() {
+        ArrayList<String> userGuess = new ArrayList<>(
+                Arrays.asList("yellow", "yellow", "yellow", "yellow"));
+
+        int correctColourAndSpot = 0;
+        int correctColourOnly = 0;
+        boolean codeIsCorrect = userGuess.equals(code);
+
+        if(codeIsCorrect==false){
+            //make a copy of the code that can be manipulated without manipulating the original
+            ArrayList<String> copyCode = new ArrayList<>(code);
+            //reverse for loop to prevent errors
+            for(int i = 3; i>=0; i--){
+                //if a guess is in the correct spot and colour, remove it from the copied code
+                if (code.get(i).equals(userGuess.get(i))){
+                    copyCode.remove(i);
+                    userGuess.remove(i);
+                    correctColourAndSpot +=1;
+                }
+            }
+            //checks if any of the guesses still remains in the leftover copy of the code.
+            for(String s : userGuess){
+                if(copyCode.contains(s)){
+                    correctColourOnly +=1;
+                    copyCode.remove(s);
+                }
+            }
+        }
+
+        assertEquals(0, correctColourOnly);
+        assertEquals(2, correctColourAndSpot);
+    }
+
+
 }
