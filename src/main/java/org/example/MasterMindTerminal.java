@@ -125,6 +125,7 @@ public void testGuess(ArrayList<String> userGuess ){
             if (code.get(i) == userGuess.get(i)){
                 correctColourAndSpot += 1;
                 copyCode.remove(i);
+                userGuess.remove(i);
             }
         }
         //checks if any of the guesses still remains in the leftover copy of the code. if it is, remove it from the copied code
